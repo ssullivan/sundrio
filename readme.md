@@ -30,7 +30,7 @@ Writing things like:
         client.image().withName("quay.io/sundrio/nginx").push().withTag("1.0").toRegistry();
         close();
     ```
-    
+
 - and pretty much anything useful that requires a lot of boilerplate ...
 
 is a great experience the first time, but a real burden from there after.
@@ -41,11 +41,11 @@ For example, some tools work via annotation processing, other works via maven/gr
 Sundrio, provides an abstract way of representing java code, that allows you to represent, manipulate and generate code, regardless of the context.
 In addition, it provides adapters that can be used adapt/convert existing representations to the sundrio model.
 
-On top of this model, it provides tools that perform tasks, like builder generators, dsl generations and more. 
+On top of this model, it provides tools that perform tasks, like builder generators, dsl generations and more.
 
 # Features
 
-- Java 
+- Java
     - [Java code model](model/readme.md)
     - [Adapters](adapters/readme.md)
       - [Annotation processing](adapters/apt/readme.md)
@@ -57,13 +57,13 @@ On top of this model, it provides tools that perform tasks, like builder generat
       - [Velocity Transformer](annotations/transform/readme.md)
       - [Resourceify](annotations/resourcecify/readme.md)
 
-- Maven 
+- Maven
     - [Maven Bom Generator](maven-plugin/readme.md)
 
 
 *Note*: Currently, builder generators, dsl generators etc are bound to annotation processing, but we are currently working on decoupling them from apt.
 
-# Code Model 
+# Code Model
 The java code model is a fluent api that allows you to:
    - create
    - refactor/manipulate
@@ -91,7 +91,7 @@ This example demonstrate how we can create a `Greeter` interface with a `helloWo
                             .withName("helloWorld")
                         .endMethod()
                         .build();
-                        
+
   System.out.println(greeter.render());
 ```
 
@@ -106,7 +106,7 @@ The output of the code above is expected to be:
 ## Adapters
 Having an api to create java source code programmatically is pretty handy at times, however it's more common to manipulate existing code or classes.
 So and `Adapter` api is provided and some core adapter implementations for:
- 
+
 - Adapting classes via reflection
 - Adapting `TypeElement` via annotation processing
 - Adapting existing source
@@ -196,14 +196,14 @@ As all hello worlds, the example is as simple as it get, yet the code model is s
 - inner classes
 - generic parameters
 
-Control is really find grained up to the point of statements, which at the moment are treated as strings. 
+Control is really find grained up to the point of statements, which at the moment are treated as strings.
 
 ## Code manipulation
 
 So far we briefly covered ways for creating `TypeDef` instances that are representing Java code.
 Code generation usually requires the manipulation of the code.
 
-As already demonstrated, the code model comes with a rich set of fluent builders that allow manipulation of code. 
+As already demonstrated, the code model comes with a rich set of fluent builders that allow manipulation of code.
 
 ### Using the builders
 
@@ -214,7 +214,7 @@ For example let's take the `Runnable` interface (as demonstrated above) and give
   TypeDef forrest = new TypeDefBuilder(runnable).withName("Forrest").build();
   System.out.println(forrest);
   ```
-  
+
 The code above should have an output:
 
 ```
@@ -245,16 +245,16 @@ Let's assume an imaginary Person class:
 public class Person extends Entity {
   private final firstName;
   private final lastName;
-  
+
   public Person(String firstName, String lastName) {
      this.firstName = firstName;
      this.lastName = lastName;
   }
-  
+
   public String getFirstName() {
      return this.firstName;
   }
-  
+
   public String getLastName() {
      return this.lastName;
   }
@@ -266,7 +266,7 @@ public class Person extends Entity {
 We want to generate a `DTO` that
 
 - will have no superclass
-- will have no mehtods
+- will have no methods
 - all fields will be public
 
 Lucky for us, we don't need to traverse all properties one by one, we can just define a visitor for `Property` objects, that will perform the task for us.
@@ -310,7 +310,7 @@ The project also includes so modules that put the code model & adapters into the
 ## [Template base code generator](annotations/transform/readme.md)
 
 
-# Compiling 
+# Compiling
 
 The project is meant to be compiled using java 8.
 The project internally is using `com.sun:tools` which is found under `$JAVA_HOME/lib/tools.jar` for all java version before 11.
